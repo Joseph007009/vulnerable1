@@ -3,6 +3,6 @@
 # Production systems should always use the latest patched versions.
 Flask==2.3.3
 Flask-Session==0.5.0
-PyMySQL==1.1.0
+PyMySQL==1.1.1
 Werkzeug==2.3.7
-cryptography==41.0.3
+cryptography==46.0.5
