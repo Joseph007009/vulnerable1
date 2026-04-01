@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Admin Orders - ShopCorp{% endblock %}
+{% block content %}
+<h2>Order Management</h2>
+<form method="GET" class="form-inline mb-3">
+    <label class="mr-2">Filter by status:</label>
+    <input type="text" name="status" value="{{ status_filter }}" class="form-control mr-2" placeholder="e.g. pending">
+    <button type="submit" class="btn btn-primary">Filter</button>
+</form>
+{% if error %}<div class="alert alert-danger">{{ error }}</div>{% endif %}
+<table class="table">
+    <thead><tr><th>ID</th><th>User</th><th>Product</th><th>Qty</th><th>Status</th><th>Date</th></tr></thead>
+    <tbody>
+    {% for o in orders %}
+    <tr><td>{{ o.id }}</td><td>{{ o.username }}</td><td>{{ o.product_id }}</td><td>{{ o.quantity }}</td><td>{{ o.status }}</td><td>{{ o.created_at }}</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

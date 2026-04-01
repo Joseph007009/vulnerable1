@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Audit Log - ShopCorp Admin{% endblock %}
+{% block content %}
+<h2>Audit Log</h2>
+<p class="text-muted">Showing logs for IP: <code>{{ ip }}</code> (from X-Forwarded-For header)</p>
+{% if error %}<div class="alert alert-danger">{{ error }}</div>{% endif %}
+<table class="table">
+    <thead><tr><th>ID</th><th>User</th><th>Action</th><th>IP</th><th>Time</th></tr></thead>
+    <tbody>
+    {% for log in logs %}
+    <tr><td>{{ log.id }}</td><td>{{ log.user_id }}</td><td>{{ log.action }}</td><td>{{ log.ip_address }}</td><td>{{ log.created_at }}</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

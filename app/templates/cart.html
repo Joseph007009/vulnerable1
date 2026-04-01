@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Orders - ShopCorp{% endblock %}
+{% block content %}
+<h2>My Orders</h2>
+{% if error %}
+<div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+{% if order %}
+<div class="card mb-4">
+    <div class="card-header">Order Detail: #{{ order.id }}</div>
+    <div class="card-body">
+        <p><strong>Status:</strong> {{ order.status }}</p>
+        <p><strong>Product ID:</strong> {{ order.product_id }}</p>
+        <p><strong>Quantity:</strong> {{ order.quantity }}</p>
+        <p><strong>Date:</strong> {{ order.created_at }}</p>
+    </div>
+</div>
+{% endif %}
+<table class="table">
+    <thead><tr><th>Order ID</th><th>Product</th><th>Qty</th><th>Status</th><th>Date</th></tr></thead>
+    <tbody>
+    {% for o in orders %}
+    <tr>
+        <td><a href="{{ url_for('main.orders', id=o.id) }}">#{{ o.id }}</a></td>
+        <td>{{ o.product_name }}</td>
+        <td>{{ o.quantity }}</td>
+        <td>{{ o.status }}</td>
+        <td>{{ o.created_at }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
