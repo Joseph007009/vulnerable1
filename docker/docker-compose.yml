@@ -1,5 +1,5 @@
-# SQL Injection Training Lab - Root docker-compose (convenience)
-# EDUCATIONAL USE ONLY
+# SQL Injection Training Lab - Docker Compose
+# EDUCATIONAL USE ONLY - Run in isolated network only
 version: '3.8'
 
 services:
@@ -9,18 +9,22 @@ services:
       MYSQL_ROOT_PASSWORD: rootpassword
       MYSQL_DATABASE: shopdb
     volumes:
-      - ./schemas/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ../schemas/init.sql:/docker-entrypoint-initdb.d/init.sql
       - db_data:/var/lib/mysql
     ports:
       - "3306:3306"
     healthcheck:
+      # NOTE: Password in healthcheck is acceptable for this isolated training lab.
+      # NEVER include credentials in healthcheck commands in production environments.
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-prootpassword"]
       interval: 10s
       timeout: 5s
       retries: 5
 
   app:
-    build: .
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
     ports:
       - "5000:5000"
     environment:
@@ -34,6 +38,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    volumes:
+      - ..:/app
 
 volumes:
   db_data:

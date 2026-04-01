@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Admin Users - ShopCorp{% endblock %}
+{% block content %}
+<h2>User Management</h2>
+<form method="GET" class="form-inline mb-3">
+    <input type="text" name="search" value="{{ request.args.get('search','') }}" class="form-control mr-2" placeholder="Search username">
+    <select name="role" class="form-control mr-2">
+        <option value="">All roles</option>
+        <option value="user">User</option>
+        <option value="admin">Admin</option>
+    </select>
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+{% if error %}<div class="alert alert-danger">{{ error }}</div>{% endif %}
+<table class="table">
+    <thead><tr><th>ID</th><th>Username</th><th>Email</th><th>Role</th><th>Created</th><th>Action</th></tr></thead>
+    <tbody>
+    {% for u in users %}
+    <tr>
+        <td>{{ u.id }}</td><td>{{ u.username }}</td><td>{{ u.email }}</td><td>{{ u.role }}</td><td>{{ u.created_at }}</td>
+        <td>
+            <form method="POST" action="{{ url_for('admin.update_user') }}" class="form-inline">
+                <input type="hidden" name="user_id" value="{{ u.id }}">
+                <select name="role" class="form-control form-control-sm mr-1">
+                    <option value="user">user</option>
+                    <option value="admin">admin</option>
+                </select>
+                <button type="submit" class="btn btn-sm btn-warning">Update</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,8 @@
+# SQL Injection Training Lab - Python dependencies
+# NOTE: These versions are pinned for reproducibility in the training environment.
+# Production systems should always use the latest patched versions.
+Flask==2.3.3
+Flask-Session==0.5.0
+PyMySQL==1.1.1
+Werkzeug==2.3.7
+cryptography==46.0.5

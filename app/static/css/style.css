@@ -1,0 +1,8 @@
+/* ShopCorp - SQL Injection Training Lab */
+body { background-color: #f8f9fa; }
+.navbar-brand { font-weight: bold; letter-spacing: 1px; }
+.card { border-radius: 8px; }
+.card-header { font-weight: 600; }
+.badge-danger { font-size: 0.9em; }
+pre { background: #272822; color: #f8f8f2; padding: 15px; border-radius: 5px; font-size: 0.85em; }
+.alert-danger code { color: #721c24; }

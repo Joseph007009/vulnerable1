@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Reports - ShopCorp Admin{% endblock %}
+{% block content %}
+<h2>Reports (report_type cookie: <code>{{ report_type }}</code>)</h2>
+{% if error %}<div class="alert alert-danger">{{ error }}</div>{% endif %}
+<p class="text-muted small">Set cookie <code>report_type</code> to filter results</p>
+<table class="table">
+    <thead><tr><th>ID</th><th>User</th><th>Product</th><th>Status</th><th>Date</th></tr></thead>
+    <tbody>
+    {% for d in data %}
+    <tr><td>{{ d.id }}</td><td>{{ d.user_id }}</td><td>{{ d.product_id }}</td><td>{{ d.status }}</td><td>{{ d.created_at }}</td></tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
