@@ -29,7 +29,7 @@ services:
       DB_PASSWORD: rootpassword
       DB_NAME: shopdb
       DB_PORT: "3306"
-      SECRET_KEY: "lab-secret-key-for-training-only"
+      SECRET_KEY: "lab-secret-key-for-training-only"  # Weak key makes session forgery trivial - intentional for training
       DEBUG: "True"
     depends_on:
       db:

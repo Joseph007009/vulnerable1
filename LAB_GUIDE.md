@@ -88,6 +88,20 @@ SELECT * FROM users WHERE username='admin'--' AND password='...'
 
 ---
 
+### Level 4 - Privilege Escalation via Role/UserID Injection
+
+| Field | Value |
+|-------|-------|
+| **Route** | `POST /admin/update_user` |
+| **File** | `admin_panel/routes.py:update_user()` |
+| **Type** | Two distinct injection points in one query |
+| **Vulnerable Parameter** | `role` (string-context), `user_id` (numeric-context) |
+| **Technique** | `role` → `admin' WHERE 1=1--`; `user_id` → `1 OR 1=1` |
+| **Fix** | Whitelist role values; parameterized query for both fields |
+| **Learning Objective** | Recognizing multiple simultaneous injection points |
+
+---
+
 ### Level 4 - API JSON Injection
 
 | Field | Value |

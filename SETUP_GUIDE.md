@@ -9,7 +9,7 @@
 ```bash
 # 1. Clone repository
 git clone <repo-url>
-cd vulnerable1
+cd vulnerable1  # or the directory name of your clone
 
 # 2. Start all services
 docker-compose up --build
