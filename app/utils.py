@@ -45,7 +45,11 @@ def sanitize_search(query):
     """
     if query is None:
         return ''
-    # Blacklist approach - easily bypassed with case variation, comments
+    # Blacklist approach - easily bypassed with:
+    # - Mixed case: 'DeLeTe', 'DrOp'
+    # - SQL comments splitting keywords: 'DR/**/OP', 'UNI/**/ON'
+    # - Double encoding / URL encoding: '%44%52%4F%50'
+    # - Nested removal: 'DROPROPDROP' becomes 'DROP' after stripping 'DROP' once
     blacklist = ['drop', 'delete', 'truncate', 'insert', 'update', '--']
     result = str(query)
     for word in blacklist:

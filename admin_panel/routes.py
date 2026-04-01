@@ -90,8 +90,10 @@ def users():
 def update_user():
     user_id = request.form.get('user_id')
     role = request.form.get('role', 'user')
-    # VULNERABILITY Level 4: both role (string) and user_id (numeric) are directly injectable
-    # role allows string-context injection; user_id allows numeric-context injection
+    # VULNERABILITY Level 4: Dual injection opportunity
+    # - 'role' is in string context (inside quotes): inject with ' or admin'--
+    # - 'user_id' is in numeric context (no quotes): inject with 1 OR 1=1
+    # Combined: role='admin' WHERE 1=1-- escalates ALL users to admin
     sql = f"UPDATE users SET role='{role}' WHERE id={user_id}"
     try:
         db_execute(sql, fetch=False)

@@ -14,6 +14,8 @@ services:
     ports:
       - "3306:3306"
     healthcheck:
+      # NOTE: Password in healthcheck is acceptable for this isolated training lab.
+      # NEVER include credentials in healthcheck commands in production environments.
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-prootpassword"]
       interval: 10s
       timeout: 5s

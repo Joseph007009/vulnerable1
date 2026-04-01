@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS users (
     role ENUM('user','admin','moderator') DEFAULT 'user',
     bio TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    last_login TIMESTAMP NULL
+    last_login TIMESTAMP NULL  -- Updated by application on successful authentication
 );
 
 -- Products table

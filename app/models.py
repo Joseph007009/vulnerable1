@@ -34,7 +34,10 @@ class User:
     @staticmethod
     def update_profile(user_id, email, bio):
         # VULNERABILITY Level 2: POST parameter injection in UPDATE
-        bio = bio.replace("'", "\\'")  # Incomplete sanitization - still bypassable
+        # Backslash escaping alone is insufficient: attackers can use double-escaping
+        # (e.g., input \' becomes \\' after escaping, closing the string),
+        # or multi-byte encoding attacks that consume the backslash.
+        bio = bio.replace("'", "\\'")
         sql = f"UPDATE users SET email='{email}', bio='{bio}' WHERE id={user_id}"
         db_execute(sql, fetch=False)
 

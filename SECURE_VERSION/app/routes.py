@@ -11,8 +11,14 @@ secure_bp = Blueprint('secure', __name__, url_prefix='/secure')
 
 
 def hash_password(password):
-    """SECURE: Use bcrypt or similar in production. SHA-256 shown for simplicity."""
-    # In real production: use bcrypt or argon2
+    """
+    EDUCATIONAL NOTE: SHA-256 is shown here for readability only.
+    It is still insecure for password storage because it is too fast.
+    In real production use bcrypt, argon2, or scrypt with a work factor:
+        import bcrypt
+        return bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt(rounds=12))
+    """
+    # WARNING: Do not use SHA-256 for password hashing in production
     return hashlib.sha256(password.encode()).hexdigest()
 
 
